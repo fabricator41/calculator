@@ -2,6 +2,16 @@ let firstNumber;
 let secondNumber;
 let operator;
 
+const display = document.getElementById('display');
+const btn = document.querySelectorAll('.cell');
+
+btn.forEach((i) => i.addEventListener('click', show));
+
+function show() {
+  console.log('clicked');
+  display.innerHTML = this.id;
+}
+
 function operate(firstNumber, secondNumber, operator) {
   switch (operator) {
     case 'add':
