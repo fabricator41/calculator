@@ -8,7 +8,7 @@ const btn = document.querySelectorAll('.cell');
 btn.forEach((i) => i.addEventListener('click', show));
 
 function show() {
-  display.innerHTML = this.id;
+  display.textContent = `${this.id}`;
 }
 
 const clearBtn = document.querySelector('#clear');
