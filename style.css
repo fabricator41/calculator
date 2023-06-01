@@ -69,3 +69,7 @@ body {
   height: 125px;
   border: 1px solid #333;
 }
+
+.control-btn {
+  padding: 16px 32px;
+}
