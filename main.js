@@ -2,17 +2,20 @@
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = '';
-let displayValue;
+let operatorSymbol = '';
 
-const display = document.getElementById('display');
+const upDisplay = document.getElementById('up-display');
 const btn = document.querySelectorAll('.cell');
-btn.forEach((i) => i.addEventListener('click', show));
+btn.forEach((i) => i.addEventListener('click', downShow));
 
-const display2 = document.getElementById('display2');
+const downDisplay = document.getElementById('down-display');
+function upShow() {
+  upDisplay.textContent = downDisplay.textContent + `${operatorSymbol}`;
+}
 
-function show() {
-  display.textContent = display.textContent + `${this.textContent}`;
-  firstNumber = display.innerHTML;
+function downShow() {
+  downDisplay.textContent = downDisplay.textContent + `${this.textContent}`;
+  firstNumber = parseInt(downDisplay.textContent);
 }
 
 const operatorBtn = document.querySelectorAll('.operator');
@@ -20,25 +23,36 @@ operatorBtn.forEach((i) => i.addEventListener('click', operatorChoice));
 
 function operatorChoice() {
   operator = this.id;
+  operatorSymbol = this.textContent;
+  upShow();
+  clearFunc2();
+}
+
+function clearFunc() {
+  upDisplay.textContent = '';
+}
+
+function clearFunc2() {
+  downDisplay.textContent = '';
 }
 
 const clearBtn = document.querySelector('#clear');
 clearBtn.addEventListener('click', () => {
-  display.textContent = '';
+  clearFunc();
+  clearFunc2();
 });
 
 const deleteBtn = document.querySelector('#delete');
 deleteBtn.addEventListener('click', () => {
-  display.textContent = '';
+  clearFunc();
+  clearFunc2();
 });
 
 const equalBtn = document.querySelector('.equal');
 
-function operate(fNumber, sNumber, ope) {
-  firstNumber = fNumber;
-  secondNumber = sNumber;
-  operator = ope;
+function operate() {
   let result = 0;
+  secondNumber = parseInt(downDisplay.textContent);
   switch (operator) {
     case 'add':
       result = add(firstNumber, secondNumber);
@@ -53,7 +67,9 @@ function operate(fNumber, sNumber, ope) {
       result = divide(firstNumber, secondNumber);
       break;
   }
-  display2.textContent = result;
+  upShow();
+  clearFunc2();
+  downDisplay.textContent = result;
 }
 
 equalBtn.addEventListener('click', operate);
