@@ -10,12 +10,12 @@ btn.forEach((i) => i.addEventListener('click', downShow));
 
 const downDisplay = document.getElementById('down-display');
 function upShow() {
-  upDisplay.textContent = downDisplay.textContent + `${operatorSymbol}`;
+  upDisplay.innerHTML = downDisplay.innerHTML + `${operatorSymbol}`;
 }
 
 function downShow() {
-  downDisplay.textContent = downDisplay.textContent + `${this.textContent}`;
-  firstNumber = parseInt(downDisplay.textContent);
+  downDisplay.innerHTML = downDisplay.innerHTML + `${this.textContent}`;
+  firstNumber = parseInt(downDisplay.innerHTML);
 }
 
 const operatorBtn = document.querySelectorAll('.operator');
@@ -53,23 +53,21 @@ const equalBtn = document.querySelector('.equal');
 function operate() {
   let result = 0;
   secondNumber = parseInt(downDisplay.textContent);
-  switch (operator) {
-    case 'add':
-      result = add(firstNumber, secondNumber);
-      break;
-    case 'subtract':
-      result = subtract(firstNumber, secondNumber);
-      break;
-    case 'multiply':
-      result = multiply(firstNumber, secondNumber);
-      break;
-    case 'divide':
-      result = divide(firstNumber, secondNumber);
-      break;
+  console.log(typeof firstNumber);
+  console.log(typeof secondNumber);
+  if (operator === 'add') {
+    result = add(firstNumber, secondNumber);
+  } else if (operator === 'subtract') {
+    result = subtract(firstNumber, secondNumber);
+  } else if (operator === 'divide') {
+    result = divide(firstNumber, secondNumber);
+  } else if (operator === 'multiply') {
+    result = multiply(firstNumber, secondNumber);
   }
   upShow();
   clearFunc2();
-  downDisplay.textContent = result;
+  console.log(result);
+  downDisplay.innerHTML = result;
 }
 
 equalBtn.addEventListener('click', operate);
