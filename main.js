@@ -1,6 +1,6 @@
 /* User input initialized */
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber = '';
+let secondNumber = '';
 let operator = '';
 let operatorSymbol = '';
 
@@ -15,7 +15,11 @@ function upShow() {
 
 function downShow() {
   downDisplay.innerHTML = downDisplay.innerHTML + `${this.innerHTML}`;
-  firstNumber = parseFloat(firstNumber + `${this.id}`);
+  if (firstNumber === '') {
+    firstNumber = parseFloat(downDisplay.innerHTML);
+  } else if (firstNumber !== '') {
+    secondNumber = parseFloat(downDisplay.innerHTML);
+  }
 }
 
 const operatorBtn = document.querySelectorAll('.operator');
@@ -29,7 +33,12 @@ function operatorChoice() {
 }
 
 function clearFunc() {
+  firstNumber = '';
+  secondNumber = '';
+  operator = '';
+  operatorSymbol = '';
   upDisplay.textContent = '';
+  downDisplay.textContent = '';
 }
 
 function clearFunc2() {
@@ -37,10 +46,7 @@ function clearFunc2() {
 }
 
 const clearBtn = document.querySelector('#clear');
-clearBtn.addEventListener('click', () => {
-  clearFunc();
-  clearFunc2();
-});
+clearBtn.addEventListener('click', clearFunc);
 
 const deleteBtn = document.querySelector('#delete');
 deleteBtn.addEventListener('click', () => {
@@ -53,9 +59,7 @@ equalBtn.addEventListener('click', operate);
 
 function operate() {
   let result = 0;
-  console.log(firstNumber);
-  secondNumber = parseFloat(downDisplay.innerHTML);
-  console.log(secondNumber);
+  downShow();
   if (operator === 'add') {
     result = add(firstNumber, secondNumber);
   } else if (operator === 'subtract') {
@@ -68,6 +72,8 @@ function operate() {
   upDisplay.innerHTML = upDisplay.innerHTML + secondNumber;
   clearFunc2();
   downDisplay.innerHTML = parseFloat(result);
+  firstNumber = '';
+  secondNumber = '';
 }
 
 function add(a, b) {
