@@ -14,8 +14,8 @@ function upShow() {
 }
 
 function downShow() {
-  downDisplay.innerHTML = downDisplay.innerHTML + `${this.textContent}`;
-  firstNumber = parseInt(downDisplay.innerHTML);
+  downDisplay.innerHTML = downDisplay.innerHTML + `${this.innerHTML}`;
+  firstNumber = parseFloat(firstNumber + `${this.id}`);
 }
 
 const operatorBtn = document.querySelectorAll('.operator');
@@ -48,13 +48,14 @@ deleteBtn.addEventListener('click', () => {
   clearFunc2();
 });
 
-const equalBtn = document.querySelector('.equal');
+const equalBtn = document.getElementById('equal');
+equalBtn.addEventListener('click', operate);
 
 function operate() {
   let result = 0;
-  secondNumber = parseInt(downDisplay.textContent);
-  console.log(typeof firstNumber);
-  console.log(typeof secondNumber);
+  console.log(firstNumber);
+  secondNumber = parseFloat(downDisplay.innerHTML);
+  console.log(secondNumber);
   if (operator === 'add') {
     result = add(firstNumber, secondNumber);
   } else if (operator === 'subtract') {
@@ -64,13 +65,10 @@ function operate() {
   } else if (operator === 'multiply') {
     result = multiply(firstNumber, secondNumber);
   }
-  upShow();
+  upDisplay.innerHTML = upDisplay.innerHTML + secondNumber;
   clearFunc2();
-  console.log(result);
-  downDisplay.innerHTML = result;
+  downDisplay.innerHTML = parseFloat(result);
 }
-
-equalBtn.addEventListener('click', operate);
 
 function add(a, b) {
   return a + b;
