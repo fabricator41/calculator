@@ -15,9 +15,9 @@ function upShow() {
 
 function downShow() {
   downDisplay.innerHTML = downDisplay.innerHTML + `${this.innerHTML}`;
-  if (firstNumber === '') {
+  if (operator === '') {
     firstNumber = parseFloat(downDisplay.innerHTML);
-  } else if (firstNumber !== '') {
+  } else if (operator !== '') {
     secondNumber = parseFloat(downDisplay.innerHTML);
   }
 }
