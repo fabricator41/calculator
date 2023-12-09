@@ -94,11 +94,14 @@ function operate(num1, num2, ope = operator) {
     currentOperationScreen.textContent = subtract(firstNumber, secondNumber);
   if (ope === "*")
     currentOperationScreen.textContent = multiply(firstNumber, secondNumber);
-  if (ope === "/")
-    currentOperationScreen.textContent = divide(
-      firstNumber,
-      secondNumber
-    ).toFixed(11);
+  if (ope === "/") {
+    let result = divide(firstNumber, secondNumber);
+    result.toString();
+    if (result.length > 11) {
+      result.toFixed(11);
+    }
+    currentOperationScreen.textContent = result;
+  }
 }
 
 function add(a, b) {
